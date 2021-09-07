@@ -8,10 +8,11 @@ import apiKey from './Components/config.js';
 import Searchform from './Components/Searchform'
 import Nav from './Components/Nav'
 import PhotoContainer from './Components/PhotoContainer'
+import Loading from './Components/Loading'
 import {cats, dogs, computers} from './Components/NavRoutes.js'
 
-
 const api = apiKey;
+
 
 export default class App extends Component {
 
@@ -24,8 +25,14 @@ export default class App extends Component {
     }
   }
 
+  //Run the search method when the page first loads
+  componentDidMount(){
+    this.search('dogs');
+  }
 
-  search = (query = 'hello') => {
+  //Fetch the data and update state.
+  search = (query) => {
+    this.setState({loading: true})
     axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
@@ -39,9 +46,6 @@ export default class App extends Component {
       }) 
   }
 
-  componentDidMount(){
-    this.search();
-  }
 
   render() {
     return(
@@ -49,15 +53,20 @@ export default class App extends Component {
         <div className="container">
           <Searchform  onSearch={this.search}/>
           <Nav />
-          <Switch>
+          {/*If Loading is true - render the loading component, else load the other routes*/}
+          {
+          (this.state.loading)
+          ? <Loading />
+          : <Switch>
           <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading}/>}/>
-          <Route path="/search/:query" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading} />} />
+          <Route path="/search/:query" render={({match}) => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading} />} />
           <Route path="/cats" render={() => <PhotoContainer data={cats} title='cats' loading={this.state.loading} />} />
           <Route path="/dogs" render={() => <PhotoContainer data={dogs} title='dogs' loading={this.state.loading} />} />
           <Route path="/computers" render={() => <PhotoContainer data={computers} title='computers' loading={this.state.loading} />} />
-          </Switch>
+            </Switch>
+          }
 
-      </div>
+        </div>
       </BrowserRouter>
       
     )
