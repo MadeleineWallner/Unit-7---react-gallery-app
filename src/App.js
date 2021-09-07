@@ -19,7 +19,8 @@ export default class App extends Component {
     super();
     this.state = {
       photos: [],
-      query: ''
+      query: '',
+      loading: true
     }
   }
 
@@ -29,7 +30,8 @@ export default class App extends Component {
       .then(response => {
         this.setState({
           photos: response.data.photos.photo,
-          title: query
+          title: query,
+          loading: false
         })
       }) 
       .catch(error => {
@@ -48,11 +50,11 @@ export default class App extends Component {
           <Searchform  onSearch={this.search}/>
           <Nav />
           <Switch>
-          <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} title={this.state.title}/>}/>
-          <Route path="/search/:query" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} />} />
-          <Route path="/cats" render={() => <PhotoContainer data={cats} title='cats' />} />
-          <Route path="/dogs" render={() => <PhotoContainer data={dogs} title='dogs' />} />
-          <Route path="/computers" render={() => <PhotoContainer data={computers} title='computers' />} />
+          <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading}/>}/>
+          <Route path="/search/:query" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading} />} />
+          <Route path="/cats" render={() => <PhotoContainer data={cats} title='cats' loading={this.state.loading} />} />
+          <Route path="/dogs" render={() => <PhotoContainer data={dogs} title='dogs' loading={this.state.loading} />} />
+          <Route path="/computers" render={() => <PhotoContainer data={computers} title='computers' loading={this.state.loading} />} />
           </Switch>
 
       </div>
@@ -61,5 +63,3 @@ export default class App extends Component {
     )
   }
 }
-
-
