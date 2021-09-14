@@ -5,7 +5,6 @@ import NotFound from './NotFound'
 class PhotoContainer extends Component {
     render(){
         const results = this.props.data;
-        console.log(this.props.loading)
         let photos;
         //if there's any results - show the photos. Else - show the not found message.
         if(results.length > 0){
