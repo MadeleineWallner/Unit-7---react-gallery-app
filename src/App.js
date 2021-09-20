@@ -8,6 +8,7 @@ import apiKey from './Components/config.js';
 import Searchform from './Components/Searchform'
 import Nav from './Components/Nav'
 import PhotoContainer from './Components/PhotoContainer'
+import NotFound from './Components/NotFound'
 import Loading from './Components/Loading'
 import {cats, dogs, computers} from './Components/NavRoutes.js'
 
@@ -63,6 +64,7 @@ export default class App extends Component {
           <Route path="/cats" render={() => <PhotoContainer data={cats} title='cats' loading={this.state.loading} />} />
           <Route path="/dogs" render={() => <PhotoContainer data={dogs} title='dogs' loading={this.state.loading} />} />
           <Route path="/computers" render={() => <PhotoContainer data={computers} title='computers' loading={this.state.loading} />} />
+          <Route render={() => <NotFound />} />
             </Switch>
           }
 
