@@ -19,9 +19,21 @@ class Searchform extends Component {
       //Pushing the path to the url
         this.props.history.push(`/search/${this.state.searchText}`) 
         e.currentTarget.reset();
+      }
+
+      //check if the url matches the current search - if not: perform a new search
+      componentDidUpdate(prevProps){
+        const prevPathname = (prevProps.location.pathname)
+        const url = window.location.pathname
+        if(url.includes("/search"))
+        if(prevPathname !== url){
+          this.props.onSearch(url.slice(8))
+        }
+        
+
         
       }
-      
+
 
     render(){
         return(
@@ -46,8 +58,6 @@ class Searchform extends Component {
 }
 
 export default withRouter (Searchform);
-
-
 
 
 

@@ -5,7 +5,7 @@ const api = apiKey;
 
 let cats = {};
 let dogs = {};
-let computers = {};
+let cows = {};
 
 //Getting the data for the 3 main topics
 
@@ -25,13 +25,13 @@ let computers = {};
       console.log(error)
     })
 
-    axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=computers&per_page=24&format=json&nojsoncallback=1`)
+    axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=cows&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
-        computers = response.data.photos.photo
+        cows = response.data.photos.photo
     }) 
     .catch(error => {
       console.log(error)
     })
 
 
-export {cats, dogs, computers}
+export {cats, dogs, cows}

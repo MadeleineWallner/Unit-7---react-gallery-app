@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios'
 import './index.css';
 
@@ -8,9 +8,9 @@ import apiKey from './Components/config.js';
 import Searchform from './Components/Searchform'
 import Nav from './Components/Nav'
 import PhotoContainer from './Components/PhotoContainer'
-import NotFound from './Components/NotFound'
+import Error from './Components/Error'
 import Loading from './Components/Loading'
-import {cats, dogs, computers} from './Components/NavRoutes.js'
+import {cats, dogs, cows} from './Components/NavRoutes.js'
 
 const api = apiKey;
 
@@ -59,12 +59,12 @@ export default class App extends Component {
           (this.state.loading)
           ? <Loading />
           : <Switch>
-          <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading}/>}/>
+          <Route exact path="/"> <Redirect to="/cats" /> </Route>
           <Route path="/search/:query" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading} />} />
           <Route path="/cats" render={() => <PhotoContainer data={cats} title='cats' loading={this.state.loading} />} />
           <Route path="/dogs" render={() => <PhotoContainer data={dogs} title='dogs' loading={this.state.loading} />} />
-          <Route path="/computers" render={() => <PhotoContainer data={computers} title='computers' loading={this.state.loading} />} />
-          <Route render={() => <NotFound />} />
+          <Route path="/cows" render={() => <PhotoContainer data={cows} title='cows' loading={this.state.loading} />} />
+          <Route render={() => <Error />} />
             </Switch>
           }
 
