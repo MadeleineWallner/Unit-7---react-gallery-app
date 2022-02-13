@@ -25,7 +25,7 @@ export default class App extends Component {
 
   //Run the search method when the page first loads
   componentDidMount(){
-    this.search("frogs");
+    this.search();
   }
 
   //Fetch the data and update state.
@@ -56,7 +56,7 @@ export default class App extends Component {
           (this.state.loading)
           ? <Loading />
           : <Switch>
-          <Route exact path="/"> <Redirect to="/cats" /> </Route>
+          <Route exact path="/" component={() => <Redirect to="/cats" />} />
           <Route path="/search/:query" render={() => <PhotoContainer data={this.state.photos} title={this.state.title} loading={this.state.loading} />} />
           <Route path="/cats" render={() => <PhotoContainer data={cats} title='cats' loading={this.state.loading} />} />
           <Route path="/dogs" render={() => <PhotoContainer data={dogs} title='dogs' loading={this.state.loading} />} />

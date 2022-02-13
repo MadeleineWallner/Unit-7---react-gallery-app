@@ -1,5 +1,4 @@
 import axios from 'axios'
-import apiKey from './config.js';
 
 const api = process.env.REACT_APP_API_KEY;
 
