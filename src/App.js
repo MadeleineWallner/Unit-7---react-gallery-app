@@ -4,7 +4,7 @@ import axios from 'axios'
 import './index.css';
 
 // Components
-import apiKey from './Components/config.js';
+
 import Searchform from './Components/Searchform'
 import Nav from './Components/Nav'
 import PhotoContainer from './Components/PhotoContainer'
