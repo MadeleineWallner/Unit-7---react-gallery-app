@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const apiKey = process.env.apiKey;
 
+
 let cats = {};
 let dogs = {};
 let cows = {};

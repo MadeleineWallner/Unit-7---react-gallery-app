@@ -30,6 +30,7 @@ export default class App extends Component {
 
   //Run the search method when the page first loads
   componentDidMount(){
+    console.log(apiKey)
     this.search("frogs");
   }
 
