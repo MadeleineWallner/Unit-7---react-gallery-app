@@ -4,7 +4,6 @@ import axios from 'axios'
 import './index.css';
 
 // Components
-// import apiKey from './Components/config.js';
 import Searchform from './Components/Searchform'
 import Nav from './Components/Nav'
 import PhotoContainer from './Components/PhotoContainer'
@@ -12,11 +11,7 @@ import Error from './Components/Error'
 import Loading from './Components/Loading'
 import {cats, dogs, cows} from './Components/NavRoutes.js'
 
-// const api = apiKey;
-
-const apiKey = process.env.apiKey;
-
-
+const api = process.env.REACT_APP_API_KEY;
 export default class App extends Component {
 
   constructor(){
@@ -30,14 +25,13 @@ export default class App extends Component {
 
   //Run the search method when the page first loads
   componentDidMount(){
-    console.log(apiKey)
     this.search("frogs");
   }
 
   //Fetch the data and update state.
   search = (query) => {
     this.setState({loading: true})
-    axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
           photos: response.data.photos.photo,
