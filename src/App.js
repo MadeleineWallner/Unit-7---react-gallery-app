@@ -12,7 +12,9 @@ import Error from './Components/Error'
 import Loading from './Components/Loading'
 import {cats, dogs, cows} from './Components/NavRoutes.js'
 
-const api = apiKey;
+// const api = apiKey;
+
+const apiKey = process.env.apiKey;
 
 
 export default class App extends Component {
@@ -34,7 +36,7 @@ export default class App extends Component {
   //Fetch the data and update state.
   search = (query) => {
     this.setState({loading: true})
-    axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
           photos: response.data.photos.photo,
